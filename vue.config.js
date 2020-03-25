@@ -35,8 +35,7 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    },
-    before: require('./mock/mock-server.js')
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -47,9 +46,34 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    externals: {
+      vue: 'Vue',
+      'element-ui': 'ELEMENT'
     }
   },
   chainWebpack(config) {
+    const cdn = {
+      css: [
+        // element-ui css
+        // 'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+        'https://cdn.bootcss.com/element-ui/2.13.0/theme-chalk/index.css'
+      ],
+      js: [
+        // vue must at first!
+        // 'https://unpkg.com/vue/dist/vue.js',
+        'https://cdn.bootcss.com/vue/2.6.11/vue.js',
+
+        // element-ui js
+        // 'https://unpkg.com/element-ui/lib/index.js'
+        'https://cdn.bootcss.com/element-ui/2.13.0/index.js'
+      ]
+    }
+    config.plugin('html')
+      .tap(args => {
+        args[0].cdn = cdn
+        return args
+      })
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
 
