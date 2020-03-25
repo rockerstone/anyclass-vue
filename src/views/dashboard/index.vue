@@ -184,7 +184,7 @@ export default {
     },
     updateTimetable() {
       this.loading = true
-      const inter = setInterval(this.progress, 155)
+      const inter = setInterval(this.progress, 600)
       updateTimetable().then(response => {
         console.log(response)
         this.loading = false
