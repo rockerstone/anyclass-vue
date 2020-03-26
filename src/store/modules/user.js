@@ -1,5 +1,4 @@
-import { login, getInfo } from '@/api/user'
-import { createStudent } from '@/api/membership'
+import { register, login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -37,7 +36,7 @@ const actions = {
   register({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      createStudent({ student_id: username.trim(), password: password }).then(response => {
+      register({ username: username.trim(), password: password }).then(response => {
         resolve()
       }).catch(error => {
         reject(error)
@@ -71,7 +70,6 @@ const actions = {
         }
 
         const { username, is_staff } = data
-        // const avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
         const avatar = ''
         const role = is_staff ? 'admin' : ''
         commit('SET_NAME', username)
@@ -91,14 +89,6 @@ const actions = {
       resetRouter()
       commit('RESET_STATE')
       resolve()
-      // logout(state.token).then(() => {
-      //   removeToken() // must remove  token  first
-      //   resetRouter()
-      //   commit('RESET_STATE')
-      //   resolve()
-      // }).catch(error => {
-      //   reject(error)
-      // })
     })
   },
 

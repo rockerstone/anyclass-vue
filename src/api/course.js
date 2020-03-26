@@ -8,13 +8,6 @@ export function createCourse(data) {
   })
 }
 
-export function getCourse() {
-  return request({
-    url: '/courses/',
-    method: 'get'
-  })
-}
-
 export function getCourseByStudent(id) {
   return request({
     url: '/courses/?student=' + id,

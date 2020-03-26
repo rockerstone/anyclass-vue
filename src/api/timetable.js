@@ -1,13 +1,6 @@
 import request from '@/utils/request'
 
-export function getTimetableAll() {
-  return request({
-    url: '/time_table/',
-    method: 'get'
-  })
-}
-
-export function getTimetable(week) {
+export function getTimetable(week = 1) {
   return request({
     url: '/time_table/' + week + '/',
     method: 'get'
