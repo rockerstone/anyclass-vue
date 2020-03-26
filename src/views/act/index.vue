@@ -52,6 +52,17 @@
           align="center"
         />
         <el-table-column
+          prop="update_time"
+          label="更新时间"
+          min-width="120"
+          sortable
+          align="center"
+        >
+          <template slot-scope="scope">
+            {{ scope.row['update_time'].substr(0, 10) }}
+          </template>
+        </el-table-column>
+        <el-table-column
           prop=""
           label="操作"
           align="center"
